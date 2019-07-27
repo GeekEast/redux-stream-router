@@ -57,5 +57,7 @@
 
 
 [OAuth 2.0 Scopes for Google APIs](https://developers.google.com/identity/protocols/googlescopes)
+
 [Google Console](https://console.developers.google.com)
+
 [gapi docs](https://developers.google.com/identity/sign-in/web/reference#gapiauth2initparams)
