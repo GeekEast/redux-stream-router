@@ -59,9 +59,3 @@
 [OAuth 2.0 Scopes for Google APIs](https://developers.google.com/identity/protocols/googlescopes)
 [Google Console](https://console.developers.google.com)
 [gapi docs](https://developers.google.com/identity/sign-in/web/reference#gapiauth2initparams)
-
-Client ID:
-449968248384-k2sa9plpnpu6l4n5tbm2s5pb0gksrb5k.apps.googleusercontent.com
-
-Client Secret:
-jAHFf13Xuze8M0WJ9gs8TZzo
