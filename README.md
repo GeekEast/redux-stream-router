@@ -43,8 +43,14 @@
     1.These are common things you want to display to every page.
     2.There are **two** ways to solve this problem: 
     3.Outside the router: this works but you `cannot` use `<Link>` within the common components.
-    4.Inside the router: this works and you can also use `<Link>`   
-
+    4.Inside the router: this works and you can also use `<Link>`  
+ - **Why we use History Object? And How?**
+  - Because we want to manipulate the browser programatically 
+  - Create our own `history` object as params and use with `Router` from 'react-router-dom' rather than `BrowserRouter`
+- **Why we need to isolate component when using React-router?**
+  - For example, `edit` Streams depends on the state of `all` streams.
+  - We need to isolate the streamEdit router component and the streamList router component
+  - Otherwise, it will cause some error `sometimes`.
 ### 3 Routers
 
 | Name          | Column B                | Column C                        |
@@ -63,14 +69,14 @@
 [gapi docs](https://developers.google.com/identity/sign-in/web/reference#gapiauth2initparams)
 
 
-### Redux Dev Tool
+### Configure Redux Dev Tool
 ```javascript
 // index.js
 import { createStore, applyMiddleware, compose } from 'redux';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 ReactDOM.render(
-	<Provider store={createStore(reducers, composeEnhancers(applyMiddleware()))}>
+	<Provider store={createStore(reducers, composeEnhancers(applyMiddleware(thunk)))}>
 		<App />
 	</Provider>,
 	document.getElementById('root')
@@ -80,4 +86,120 @@ ReactDOM.render(
 ### [Redux Form](https://redux-form.com/8.2.2/)
 - a convenient reducer for form component
 - A convenient solution for communication between views and redux state.
+```javascript
+import React from 'react';
+import { Field, reduxForm } from 'redux-form';
+
+class StreamForm extends React.Component {
+	renderError = ({ error, touched }) => {
+		if (error && touched) {
+			return (
+				<div className="ui error message">
+					<div className="header"> {error}</div>
+				</div>
+			);
+		}
+	};
+	// meta is connected with validate function
+	renderInput = ({ input, label, meta }) => {
+		const className = `field ${meta.error && meta.touched ? 'error' : ''}`;
+		return (
+			<div className={className}>
+				<label>{label}</label>
+				<input {...input} autoComplete="off" />
+				{this.renderError(meta)}
+			</div>
+		);
+	};
+
+	onSubmit = (formValues) => {
+		this.props.onSubmit(formValues);
+	};
+	render() {
+		return (
+			// magic props with handleSubmit method
+			<form onSubmit={this.props.handleSubmit(this.onSubmit)} className="ui form error">
+				{/* user input field */}
+				<Field name="title" component={this.renderInput} label="Enter Title" />
+				<Field name="description" component={this.renderInput} label="Enter Description" />
+				<button className="ui button primary">Submit</button>
+			</form>
+		);
+	}
+}
+
+// every time you input will run this function
+const validate = (formValues) => {
+	const errors = {};
+	if (!formValues.title) {
+		errors.title = 'You must enter a title';
+	}
+	if (!formValues.description) {
+		errors.description = 'You must enter a description';
+	}
+
+	return errors;
+};
+
+export default reduxForm({ form: 'streamForm', validate })(StreamForm);
+
+```
+
+
+### Convert Object to Array
+```javascript
+const streams = Object.values(object);
+```
+### Convert Array to Object
+```javascript
+const streams = _.mapKeys(array,'id');
+```
+
+### Loadsh `mapKeys()`
+```javascript
+// this will take '' as the new key and return as an object
+mapKeys(iterable,(v,k)=>{return ''})
+// this will take v[attr_name] as the new key and retur as an object
+mapKeys(iterable, 'attr_name')
+// equals to 
+mapKeys(iterable, (v,k) => v['attr_name'])
+```
+
+### View Update Flow Chart
+<img style="width: 80%; margin: auto" src="https://geekeaskblogpics.s3-ap-southeast-2.amazonaws.com/posts/WX20190729-160600%402x.png"/>
+
+
+### History Object
+- It's more flexible to manage your own history object rather than useing the BrowserRouter's
+```javascript
+// history.js
+import { createBrowserHistory } from 'history';
+export default createBrowserHistory();
+```
+```javascript
+import React from 'react';
+// code code
+import { Router, Route } from 'react-router-dom';
+import history from '../history';
+
+const App = () => {
+	return (
+      <div className="ui container">
+         // core code
+			<Router history={history}>
+				<Header />
+				<Route path="/" exact component={StreamList} />
+			</Router>
+		</div>
+	);
+};
+
+export default App;
+```
+
+### React Portal
+- Why we need to use react portal?
+  - If we want to use modal, we'd better take it as a child of `body` element with a `z-index` value
+  - Portal is a convenient way to `modify` the `parent` component of an existing component.
+
 

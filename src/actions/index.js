@@ -6,5 +6,5 @@
  */
 
 import { signIn, signOut } from './auth';
-import { createStream } from './streams';
-export { signIn, signOut, createStream };
+import { createStream, getStream, getStreams, udpateStream, deleteStream } from './streams';
+export { signIn, signOut, createStream, getStream, getStreams, udpateStream, deleteStream };

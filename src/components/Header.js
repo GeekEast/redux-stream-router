@@ -6,12 +6,12 @@ class Header extends React.Component {
 	render() {
 		return (
 			<div className="ui secondary pointing menu">
-				<Link to="/streams/create" className="item">
+				<Link to="/" className="item">
 					Streamy
 				</Link>
 
 				<div className="right menu">
-					<Link to="/streams/show" className="item">
+					<Link to="/" className="item">
 						All Streams
 					</Link>
 
