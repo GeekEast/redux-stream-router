@@ -1,15 +1,9 @@
-// action creators
-import { SIGN_IN, SIGN_OUT } from './types';
+/**
+ * In Actions, you serveral things
+ * 1. API Request: CRUD
+ * 2. dispatch actions to redux store to update state
+ */
 
-export const signIn = (userId) => {
-	return {
-		type: SIGN_IN,
-		payload: userId
-	};
-};
-
-export const signOut = () => {
-	return {
-		type: SIGN_OUT
-	};
-};
+import { signIn, signOut } from './auth';
+import { createStream } from './streams';
+export { signIn, signOut, createStream };

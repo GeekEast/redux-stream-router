@@ -61,3 +61,22 @@
 [Google Console](https://console.developers.google.com)
 
 [gapi docs](https://developers.google.com/identity/sign-in/web/reference#gapiauth2initparams)
+
+
+### Redux Dev Tool
+```javascript
+// index.js
+import { createStore, applyMiddleware, compose } from 'redux';
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+ReactDOM.render(
+	<Provider store={createStore(reducers, composeEnhancers(applyMiddleware()))}>
+		<App />
+	</Provider>,
+	document.getElementById('root')
+```
+
+
+### [Redux Form](https://redux-form.com/8.2.2/)
+- a convenient reducer for form component
+
