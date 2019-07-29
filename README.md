@@ -79,4 +79,5 @@ ReactDOM.render(
 
 ### [Redux Form](https://redux-form.com/8.2.2/)
 - a convenient reducer for form component
+- A convenient solution for communication between views and redux state.
 

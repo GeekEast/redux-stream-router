@@ -1,16 +1,10 @@
-/**
- * In Actions, you serveral things
- * 1. API Request: CRUD
- * 2. dispatch actions to redux store to update state
- */
-
 import { streams } from '../apis';
-import { STREAM_CREATE, FETCH_STREAM, FETCH_STREAMS, DELETE_STREAM, EDIT_STREAM } from './types';
+import { CREATE_STREAM, FETCH_STREAM, FETCH_STREAMS, DELETE_STREAM, EDIT_STREAM } from './types';
 
 // C
 export const createStream = (formValues) => async (dispatch) => {
 	const response = await streams.post('/streams', formValues);
-	dispatch({ type: STREAM_CREATE, payload: response.data });
+	dispatch({ type: CREATE_STREAM, payload: response.data });
 };
 
 // R
