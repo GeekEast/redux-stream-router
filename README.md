@@ -202,4 +202,7 @@ export default App;
   - If we want to use modal, we'd better take it as a child of `body` element with a `z-index` value
   - Portal is a convenient way to `modify` the `parent` component of an existing component.
 
-
+### Fragment
+- Why we need to use React Fragment?
+  - Some `div` wrapper will break the styling rules
+  - `Fragment` is like `div`, but doesn't produce any `html` tags
