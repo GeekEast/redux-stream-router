@@ -206,3 +206,39 @@ export default App;
 - Why we need to use React Fragment?
   - Some `div` wrapper will break the styling rules
   - `Fragment` is like `div`, but doesn't produce any `html` tags
+
+### Switch
+- What is switch? What is it used for?
+	```javascript
+	// this will show StreamCreate and StreamShow together
+	// 同级变量和定量重合问题
+	<Router history={history}>
+		<Header />
+		<Route path="/streams/new" exact component={StreamCreate} />
+		<Route path="/streams/:id" exact component={StreamShow} />
+	</Router>
+	```
+	- Solution
+	```javascript
+		// 只会渲染第一个匹配到的路径
+		<Router history={history}>
+			<Header />
+			<Switch>
+				<Route path="/streams/new" exact component={StreamCreate} />
+				<Route path="/streams/:id" exact component={StreamShow} />
+			</Switch>
+		</Router>
+	```
+- Conclusion:
+  - Different Lengths: always with **`exact`**: order doesn't matter but for good format - from **`Long`** to **`Short`**
+	```javascript
+	<Route path="/streams/" exact component={StreamShow} />
+	<Route path="/" exact component={StreamList} />
+    ```
+  - Same Length: always wrapped with **`Switch`**: from **`Fixed`** to **`Variable`**
+	```javascript
+	<Switch>
+		<Route path="/streams/new" exact component={StreamShow} />
+		<Route path="/streams/:id" exact component={StreamList} />
+	</Switch>
+    ```
