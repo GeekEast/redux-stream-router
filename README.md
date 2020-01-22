@@ -22,7 +22,7 @@
             <Route path="/pageone"  component={PageOne} />
         </BrowserRouter>
     ```
-    - The PageOne will be displayed.
+    - The Home will be displayed.
 
  - **How React Router match path?**
    1. For example. for address `localhost:3000/page/5`, and we have path `/`, `/page`, `/page/5`.
